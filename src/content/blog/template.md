@@ -8,7 +8,7 @@ category: "technology"
 # remove this line to publish
 draft: true
 # author slug: choose from "./src/data/authors.js"
-author: "mario-sanchez"
+author: "andres-morales"
 tags: [tag1, tag2, tag3]
 ---
 
