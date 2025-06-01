@@ -12,9 +12,7 @@ import { Icon } from "astro-icon/components";
 
 const { post, aspect, preloadImage } = Astro.props;
 const author = authors.find((item) => item.slug === post.data.author) as Author;
-const category = categories.find(
-(item) => item.slug === post.data.category
-) as Category;
+const category = categories.find( (item) => item.slug === post.data.category) as Category;
 ---
 
 <div class="cursor-pointer group">

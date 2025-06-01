@@ -11,7 +11,7 @@ export type Author = Props;
 
 export const authors: Props[] = [
     {
-        name: "Andres Morales",
+        name: "Andrés Morales",
         slug: "andres-morales",
         image: blissImage,
         bio: "Who am I?",

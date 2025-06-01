@@ -1,69 +1,56 @@
 ---
-title: "Test"
+title: "Borrando archivos de manera recursiva en Windows"
+publishDate: "2025-05-31T11:39:36.050Z"
 excerpt: "Ornare cum cursus laoreet sagittis nunc fusce posuere per euismod dis vehicula a, semper fames lacus maecenas dictumst pulvinar neque enim non potenti. Torquent hac sociosqu eleifend potenti."
-publishDate: "2024-05-30T11:39:36.050Z"
-image: "../../assets/blog/blog3.avif"
-category: "lifestyle"
-draft: true
+image: "../../assets/1344305.png"
+category: "technology"
 author: "andres-morales"
 tags: [scripts]
 ---
 
-## Ejemplos para poder borrar de manera recursiva en windows y linux
-Esto es bastante util porque me encontre en una situacion donde debia
-eliminar siempre unos archivos que se descargan, tenian siempre el mismo nombre
-y los tenia recursivamente en diferentes carpetas. No pense hacerlo en el momento
-de manera programatica pero ya luego cai en cuenta que debia haber alguna manera
-para no hacerlo manual y eliminar uno por uno o por seleccion con el mouse.
+## Ejemplos para poder borrar de manera recursiva
+Esto es bastante útil porque me encontré en una situación donde debía
+eliminar siempre unos archivos, tenían siempre el mismo nombre
+y los tenía recursivamente en diferentes carpetas. No pensé hacerlo en el momento
+de manera programática pero ya luego caí en cuenta que debia haber alguna manera
+para no hacerlo manual y eliminar uno por uno o por selección con el mouse.
 
-Asi que aqui dejo scripts que muy amablemente gpt me colaboro a sacar y que son
-de mucha ayuda
+Así que aqui dejo el script con el que gpt muy amablemente me colaboró, que revisé y que resultó
+de mucha ayuda.
 
 ## PowerShell Script
 Antes de irnos a borrar directamente archivos es recomendable primero listarlos para 
-evidenciar que se va a estar eliminando y en donde.
+evidenciar qué se va a estar eliminando y en dónde.
 
-Primero declaramos los archivos que queremos eliminar de manera recursiva en powershell:
+Primero declaramos los archivos que queremos eliminar de manera recursiva en PowerShell:
 
+```powershell
 $fileNamesToDelete = @("test.txt", "readme.txt")
+```
 
 Luego declaramos y asignamos nuestra carpeta principal donde queremos que se eliminen
 archivos de manera recursiva:
 
+```powershell
 $targetFolder = "C:\Your\Folder"
-
-Para encontrar la ruta de esta o cualquier carpeta, le podemos dar click derecho a la misma
-y darle click a la opcion de Copiar como ruta de acceso.
-
-Imagen de la opcion de copiar como ruta de acceso
+```
 
 Ahora seguimos con el paso de hacerle print a los archivos que queremos eliminar
-para evidenciar que en efecto sean los que queremos:
+para evidenciar que en efecto sean los que queremos.
 
+En PowerShell colocamos:
+
+```powershell
 Get-ChildItem -Path $targetFolder -Recurse -File | Where-Object {
 $fileNamesToDelete -contains $_.Name
 } | Select-Object FullName
+```
 
-Y ya por ultimo queda el paso de la eliminacion:
+Y ya por ultimo queda el paso de la eliminación una vez estamos seguros de
+que sí sean los que deseamos eliminar:
 
+```powershell
 Get-ChildItem -Path $targetFolder -Recurse -File | Where-Object{
 $fileNamesToDelete -contains $_.Name
 } | Remove-Item -Force
-
-## Bash Script
-
-find "$root_dir" -type f -name "$filename" -exec echo {} +
-
-#!/bin/bash
-
-# Define array of file names to delete
-files_to_delete=("thumbs.db" "desktop.ini" "readme.txt")
-
-# Root directory to start from
-root_dir="/path/to/your/folder"
-
-# Traverse and delete
-for filename in "${files_to_delete[@]}"; do
-    find "$root_dir" -type f -name "$filename" -exec rm -f {} +
-done
-
+```
